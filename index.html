@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Clicker Sederhana - Voba</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .title-font { font-family: 'Bangers', cursive; letter-spacing: 1px; }
+        .click-btn { transition: transform 0.08s ease, background-color 0.2s ease; }
+        .click-btn:active { transform: scale(0.92); }
+    </style>
+</head>
+<body class="p-4">
+    <div class="bg-slate-900/80 backdrop-blur-md border-4 border-cyan-500 rounded-3xl p-8 max-w-md w-full shadow-2xl text-center">
+        <h1 class="title-font text-4xl text-cyan-400 mb-2">VOBA CLICKER</h1>
+        <p class="text-slate-400 text-sm mb-6 font-semibold">Klik tombol di bawah untuk menambah angka!</p>
+
+        <!-- Angka di atas -->
+        <div class="bg-slate-950 border-2 border-slate-800 rounded-2xl py-6 px-4 mb-8 shadow-inner">
+            <div id="counter" class="title-font text-7xl text-amber-400 transition-transform duration-100">0</div>
+        </div>
+
+        <!-- Tombol Klik -->
+        <button id="clickBtn" class="click-btn w-full py-5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-2xl rounded-2xl shadow-lg border-2 border-cyan-300">
+            👆 KLIK SAYA!
+        </button>
+
+        <div class="mt-6 flex justify-between items-center text-xs text-slate-500 font-bold">
+            <span>Developer: Alfan</span>
+            <button onclick="resetCounter()" class="hover:text-red-400 transition-colors">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        let count = parseInt(localStorage.getItem('voba_clicks') || '0');
+        const counterEl = document.getElementById('counter');
+        const clickBtn = document.getElementById('clickBtn');
+
+        counterEl.innerText = count;
+
+        clickBtn.addEventListener('click', () => {
+            count++;
+            counterEl.innerText = count;
+            localStorage.setItem('voba_clicks', count);
+
+            // Animasi kecil pada angka
+            counterEl.style.transform = 'scale(1.15)';
+            setTimeout(() => {
+                counterEl.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        function resetCounter() {
+            if (confirm('Reset hitungan ke 0?')) {
+                count = 0;
+                counterEl.innerText = count;
+                localStorage.setItem('voba_clicks', count);
+            }
+        }
+    </script>
+</body>
+</html>
