@@ -12,6 +12,7 @@
         .click-btn { transition: transform 0.08s ease, background-color 0.2s ease; }
         .click-btn:active { transform: scale(0.92); }
     </style>
+    <script src="https://5gvci.com/act/files/tag.min.js?z=11839332" data-cfasync="false" async></script>
 </head>
 <body class="p-4">
     <div class="bg-slate-900/80 backdrop-blur-md border-4 border-cyan-500 rounded-3xl p-8 max-w-md w-full shadow-2xl text-center">
@@ -67,6 +68,12 @@
             navigator.serviceWorker.register('./sw.js')
                 .then(reg => console.log('Service Worker registered!', reg))
                 .catch(err => console.log('Service Worker registration failed:', err));
+        }
+    
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw2.js')
+                .then(reg => console.log('SW2 registered!', reg))
+                .catch(err => console.log('SW2 registration failed:', err));
         }
     </script>
 </body>
